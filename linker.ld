@@ -9,6 +9,10 @@ SECTIONS
         KEEP(*(.hook))
         *(.text .text.*)
         *(.rodata .rodata.*)
+        . = ALIGN(4);
+        __ds4_mapping_start = .;
+        KEEP(*(.ds4_mapping))
+        __ds4_mapping_end = .;
         *(.data .data.*)
         *(.sdata .sdata.*)
         *(.sbss .sbss.*)
@@ -27,6 +31,10 @@ SECTIONS
            "payload exceeds the reserved 512 KiB MEM1 region")
     ASSERT(ADDR(.payload) + SIZEOF(.payload) <= 0x81800000,
            "payload crosses the physical end of MEM1")
+    ASSERT(ADDR(.payload) + SIZEOF(.payload) <= 0x81792000,
+           "payload overlaps the first fixed auxiliary cache")
+    ASSERT(__ds4_mapping_end - __ds4_mapping_start == 69,
+           "DS4 mapping must contain exactly one 23-entry descriptor")
 
     /DISCARD/ :
     {

@@ -2,7 +2,9 @@
 param(
     [string]$DolphinExe,
     [string]$IsoPath,
-    [string]$UserDirectory
+    [string]$UserDirectory,
+    [ValidateSet('DualSense', 'DualShock4')]
+    [string]$Controller = 'DualSense'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -16,7 +18,8 @@ if ([string]::IsNullOrWhiteSpace($IsoPath)) {
     $IsoPath = Join-Path $projectRoot 'dist\USM_GUTE52_DebugMenu_final.iso'
 }
 if ([string]::IsNullOrWhiteSpace($UserDirectory)) {
-    $UserDirectory = Join-Path $projectRoot 'build\dolphin_dualsense_user'
+    $profileSuffix = if ($Controller -eq 'DualShock4') { 'ds4' } else { 'dualsense' }
+    $UserDirectory = Join-Path $projectRoot "build\dolphin_${profileSuffix}_user"
 }
 
 $DolphinExe = [System.IO.Path]::GetFullPath($DolphinExe)
@@ -48,15 +51,25 @@ if ($runningDolphin.Count -ne 0) {
     $runningIds = ($runningDolphin.Id | Sort-Object) -join ', '
     [Console]::Error.WriteLine(
         "Close the other Dolphin window(s) first (PID: $runningIds). " +
-        "A second Dolphin process may not receive the DualSense PS/Guide input.")
+        "A second Dolphin process may not receive the controller Select/Guide input.")
     exit 2
 }
 
 $configDirectory = Join-Path $UserDirectory 'Config'
 New-Item -ItemType Directory -Path $configDirectory -Force | Out-Null
 
+$controllerConfigName = if ($Controller -eq 'DualShock4') {
+    'GCPadNew_DS4.ini'
+} else {
+    'GCPadNew.ini'
+}
 foreach ($configName in @('Dolphin.ini', 'GCPadNew.ini', 'Logger.ini')) {
-    $configSource = Join-Path $projectRoot "dolphin\$configName"
+    $sourceName = if ($configName -eq 'GCPadNew.ini') {
+        $controllerConfigName
+    } else {
+        $configName
+    }
+    $configSource = Join-Path $projectRoot "dolphin\$sourceName"
     if (-not (Test-Path -LiteralPath $configSource -PathType Leaf)) {
         throw "Required controller profile file not found: $configSource"
     }
@@ -69,5 +82,5 @@ $process = Start-Process -FilePath $DolphinExe -ArgumentList @(
     '-e', ('"' + $IsoPath + '"')
 ) -PassThru
 
-Write-Host "Started Dolphin PID $($process.Id) with the isolated DualSense profile:"
+Write-Host "Started Dolphin PID $($process.Id) with the isolated $Controller profile:"
 Write-Host $UserDirectory
