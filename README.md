@@ -1,4 +1,4 @@
-# Ultimate Spider-Man GameCube debug menu (GUTE52)
+# Ultimate Spider-Man GameCube debug menu
 
 This project ports the supplied Ultimate Spider-Man debug menu to the North
 American GameCube retail executable. It builds a freestanding PowerPC payload,
