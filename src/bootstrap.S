@@ -10,6 +10,11 @@
 
     .section .bootstrap,"ax",@progbits
     .align 5
+#ifndef PAYLOAD_COPY_SIZE
+#error "PAYLOAD_COPY_SIZE must be supplied by the build"
+#endif
+    .global payload_copy_size
+    .set payload_copy_size,PAYLOAD_COPY_SIZE
     .global bootstrap_entry
     .type bootstrap_entry,@function
 
