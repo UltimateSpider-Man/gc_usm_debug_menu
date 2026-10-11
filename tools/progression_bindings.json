@@ -1,0 +1,23 @@
+[
+  {"address":"0x80618714","expected":"0x7F170634","symbol":"usm_gc_progression_create","kind":"absolute"},
+  {"address":"0x806186F4","expected":"0x7F170690","symbol":"usm_gc_progression_destroy","kind":"absolute"},
+  {"address":"0x806186D4","expected":"0x7F1706A4","symbol":"usm_gc_progression_get_name","kind":"absolute"},
+  {"address":"0x806186B4","expected":"0x7F170710","symbol":"usm_gc_progression_set_name","kind":"absolute"},
+  {"address":"0x80618694","expected":"0x7F170724","symbol":"usm_gc_progression_get_id","kind":"absolute"},
+  {"address":"0x80618674","expected":"0x7F170784","symbol":"usm_gc_progression_set_id","kind":"absolute"},
+  {"address":"0x80618654","expected":"0x7F170798","symbol":"usm_gc_progression_get_handler","kind":"absolute"},
+  {"address":"0x80618634","expected":"0x7F170804","symbol":"usm_gc_progression_set_handler","kind":"absolute"},
+  {"address":"0x80618614","expected":"0x7F170818","symbol":"usm_gc_progression_get_value","kind":"absolute"},
+  {"address":"0x806185F4","expected":"0x7F170878","symbol":"usm_gc_progression_set_value","kind":"absolute"},
+  {"address":"0x806185D4","expected":"0x7F17088C","symbol":"usm_gc_progression_get_value_type","kind":"absolute"},
+  {"address":"0x806185B4","expected":"0x7F1708EC","symbol":"usm_gc_progression_set_value_type","kind":"absolute"},
+  {"address":"0x80618594","expected":"0x7F170900","symbol":"usm_gc_progression_get_min_value","kind":"absolute"},
+  {"address":"0x80618574","expected":"0x7F170960","symbol":"usm_gc_progression_set_min_value","kind":"absolute"},
+  {"address":"0x80618554","expected":"0x7F170974","symbol":"usm_gc_progression_get_max_value","kind":"absolute"},
+  {"address":"0x80618534","expected":"0x7F1709D4","symbol":"usm_gc_progression_set_max_value","kind":"absolute"},
+  {"address":"0x80618514","expected":"0x7F1709E8","symbol":"usm_gc_progression_get_step_size","kind":"absolute"},
+  {"address":"0x806184F4","expected":"0x7F170A48","symbol":"usm_gc_progression_set_step_size","kind":"absolute"},
+  {"address":"0x806184D4","expected":"0x7F170A5C","symbol":"usm_gc_progression_get_step_scale","kind":"absolute"},
+  {"address":"0x806184B4","expected":"0x7F170ABC","symbol":"usm_gc_progression_set_step_scale","kind":"absolute"},
+  {"address":"0x801B2C28","expected":"0x480008E1","symbol":"usm_gc_progression_instance_callbacks","kind":"branch"}
+]
